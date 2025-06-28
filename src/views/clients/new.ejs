@@ -1,0 +1,371 @@
+<h2>Novo Cliente</h2>
+
+<% if (typeof error !== 'undefined') { %>
+  <div class="alert alert-danger">
+    <%= error %>
+  </div>
+<% } %>
+
+<form action="/clients" method="POST" class="client-form" id="clientForm">
+  <div class="form-section">
+    <h3>Dados Pessoais</h3>
+    
+    <div class="form-group">
+      <label for="name">Nome:</label>
+      <input type="text" id="name" name="name" required value="<%= typeof client !== 'undefined' ? client.name || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" name="cpf" required value="<%= typeof client !== 'undefined' ? client.cpf || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="gender">Gênero:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Selecione...</option>
+        <% genders.forEach(gender => { %>
+          <option value="<%= gender %>" <%= typeof client !== 'undefined' && client.gender === gender ? 'selected' : '' %>>
+            <%= gender === 'M' ? 'Masculino' : gender === 'F' ? 'Feminino' : gender === 'O' ? 'Outro' : 'Não Informado' %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="birthDate">Data de Nascimento:</label>
+      <input type="date" id="birthDate" name="birthDate" required value="<%= typeof client !== 'undefined' ? client.birthDate || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required value="<%= typeof client !== 'undefined' ? client.email || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <h3>Telefone</h3>
+    
+    <div class="form-group">
+      <label for="phoneType">Tipo:</label>
+      <select id="phoneType" name="phoneType" required>
+        <option value="">Selecione...</option>
+        <% phoneTypes.forEach(type => { %>
+          <option value="<%= type %>" <%= typeof client !== 'undefined' && client.phoneType === type ? 'selected' : '' %>><%= type %></option>
+        <% }) %>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="areaCode">DDD:</label>
+      <input type="text" id="areaCode" name="areaCode" maxlength="2" required value="<%= typeof client !== 'undefined' ? client.areaCode || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="phone">Número:</label>
+      <input type="text" id="phone" name="phone" required value="<%= typeof client !== 'undefined' ? client.phone || '' : '' %>">
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <h3>Endereço Residencial</h3>
+    
+    <div class="form-group">
+      <label for="resResidenceType">Tipo de Residência:</label>
+      <select id="resResidenceType" name="resResidenceType" required>
+        <option value="">Selecione...</option>
+        <% residenceTypes.forEach(type => { %>
+          <option value="<%= type %>" <%= typeof client !== 'undefined' && client.resResidenceType === type ? 'selected' : '' %>><%= type %></option>
+        <% }) %>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="resStreetType">Tipo de Logradouro:</label>
+      <select id="resStreetType" name="resStreetType" required>
+        <option value="">Selecione...</option>
+        <% streetTypes.forEach(type => { %>
+          <option value="<%= type %>" <%= typeof client !== 'undefined' && client.resStreetType === type ? 'selected' : '' %>><%= type %></option>
+        <% }) %>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="resStreet">Logradouro:</label>
+      <input type="text" id="resStreet" name="resStreet" required value="<%= typeof client !== 'undefined' ? client.resStreet || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resNumber">Número:</label>
+      <input type="text" id="resNumber" name="resNumber" required value="<%= typeof client !== 'undefined' ? client.resNumber || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resNeighborhood">Bairro:</label>
+      <input type="text" id="resNeighborhood" name="resNeighborhood" required value="<%= typeof client !== 'undefined' ? client.resNeighborhood || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resZipCode">CEP:</label>
+      <input type="text" id="resZipCode" name="resZipCode" required value="<%= typeof client !== 'undefined' ? client.resZipCode || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resCity">Cidade:</label>
+      <input type="text" id="resCity" name="resCity" required value="<%= typeof client !== 'undefined' ? client.resCity || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resState">Estado:</label>
+      <input type="text" id="resState" name="resState" required value="<%= typeof client !== 'undefined' ? client.resState || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resCountry">País:</label>
+      <input type="text" id="resCountry" name="resCountry" required value="<%= typeof client !== 'undefined' ? client.resCountry || '' : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="resObservations">Observações:</label>
+      <textarea id="resObservations" name="resObservations" rows="3"><%= typeof client !== 'undefined' ? client.resObservations || '' : '' %></textarea>
+    </div>
+  </div>
+
+  <!-- Billing Address Section -->
+  <div class="form-section">
+    <h3>Endereços de Cobrança</h3>
+    
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="useResidentialAsBilling" name="useResidentialAsBilling" value="true">
+        <span class="checkbox-text">Usar endereço residencial como endereço de cobrança</span>
+      </label>
+    </div>
+    
+    <div id="billingAddressesContainer">
+      <div class="address-header">
+        <h4>Endereços de Cobrança Adicionais</h4>
+        <button type="button" id="addBillingAddress" class="btn btn-secondary">
+          <i class="icon-plus"></i> Adicionar Endereço de Cobrança
+        </button>
+      </div>
+      <div id="billingAddressesList"></div>
+    </div>
+  </div>
+
+  <!-- Delivery Address Section -->
+  <div class="form-section">
+    <h3>Endereços de Entrega</h3>
+    
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="useResidentialAsDelivery" name="useResidentialAsDelivery" value="true">
+        <span class="checkbox-text">Usar endereço residencial como endereço de entrega</span>
+      </label>
+    </div>
+    
+    <div id="deliveryAddressesContainer">
+      <div class="address-header">
+        <h4>Endereços de Entrega Adicionais</h4>
+        <button type="button" id="addDeliveryAddress" class="btn btn-secondary">
+          <i class="icon-plus"></i> Adicionar Endereço de Entrega
+        </button>
+      </div>
+      <div id="deliveryAddressesList"></div>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Salvar Cliente</button>
+    <a href="/clients" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let billingAddressCount = 0;
+  let deliveryAddressCount = 0;
+
+  const residenceTypes = <%- JSON.stringify(residenceTypes) %>;
+  const streetTypes = <%- JSON.stringify(streetTypes) %>;
+
+  function createAddressForm(type, index) {
+    const prefix = type === 'billing' ? 'billing' : 'delivery';
+    const title = type === 'billing' ? 'Cobrança' : 'Entrega';
+    
+    return `
+      <div class="address-form" data-type="${type}" data-index="${index}">
+        <div class="address-form-header">
+          <h5>Endereço de ${title} ${index + 1}</h5>
+          <button type="button" class="btn btn-danger btn-small remove-address">
+            <i class="icon-trash"></i> Remover
+          </button>
+        </div>
+        
+        <div class="address-fields">
+          <div class="form-group">
+            <label>Tipo de Residência:</label>
+            <select name="${prefix}Addresses[${index}][residenceType]" required>
+              <option value="">Selecione...</option>
+              ${residenceTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Tipo de Logradouro:</label>
+            <select name="${prefix}Addresses[${index}][streetType]" required>
+              <option value="">Selecione...</option>
+              ${streetTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Logradouro:</label>
+            <input type="text" name="${prefix}Addresses[${index}][street]" required placeholder="Nome da rua">
+          </div>
+          
+          <div class="form-group">
+            <label>Número:</label>
+            <input type="text" name="${prefix}Addresses[${index}][number]" required placeholder="123">
+          </div>
+          
+          <div class="form-group">
+            <label>Bairro:</label>
+            <input type="text" name="${prefix}Addresses[${index}][neighborhood]" required placeholder="Nome do bairro">
+          </div>
+          
+          <div class="form-group">
+            <label>CEP:</label>
+            <input type="text" name="${prefix}Addresses[${index}][zipCode]" required placeholder="00000-000">
+          </div>
+          
+          <div class="form-group">
+            <label>Cidade:</label>
+            <input type="text" name="${prefix}Addresses[${index}][city]" required placeholder="Nome da cidade">
+          </div>
+          
+          <div class="form-group">
+            <label>Estado:</label>
+            <input type="text" name="${prefix}Addresses[${index}][state]" required placeholder="Nome do estado">
+          </div>
+          
+          <div class="form-group">
+            <label>País:</label>
+            <input type="text" name="${prefix}Addresses[${index}][country]" required placeholder="Brasil" value="Brasil">
+          </div>
+          
+          <div class="form-group form-group-full">
+            <label>Observações:</label>
+            <textarea name="${prefix}Addresses[${index}][observations]" rows="3" placeholder="Informações adicionais sobre o endereço"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Add billing address
+  document.getElementById('addBillingAddress').addEventListener('click', function() {
+    const container = document.getElementById('billingAddressesList');
+    const addressForm = createAddressForm('billing', billingAddressCount);
+    container.insertAdjacentHTML('beforeend', addressForm);
+    billingAddressCount++;
+    
+    // Add animation
+    const newForm = container.lastElementChild;
+    newForm.style.opacity = '0';
+    newForm.style.transform = 'translateY(-10px)';
+    setTimeout(() => {
+      newForm.style.transition = 'all 0.3s ease';
+      newForm.style.opacity = '1';
+      newForm.style.transform = 'translateY(0)';
+    }, 10);
+  });
+
+  // Add delivery address
+  document.getElementById('addDeliveryAddress').addEventListener('click', function() {
+    const container = document.getElementById('deliveryAddressesList');
+    const addressForm = createAddressForm('delivery', deliveryAddressCount);
+    container.insertAdjacentHTML('beforeend', addressForm);
+    deliveryAddressCount++;
+    
+    // Add animation
+    const newForm = container.lastElementChild;
+    newForm.style.opacity = '0';
+    newForm.style.transform = 'translateY(-10px)';
+    setTimeout(() => {
+      newForm.style.transition = 'all 0.3s ease';
+      newForm.style.opacity = '1';
+      newForm.style.transform = 'translateY(0)';
+    }, 10);
+  });
+
+  // Remove address
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-address') || e.target.closest('.remove-address')) {
+      const addressForm = e.target.closest('.address-form');
+      
+      // Add remove animation
+      addressForm.style.transition = 'all 0.3s ease';
+      addressForm.style.opacity = '0';
+      addressForm.style.transform = 'translateX(-100%)';
+      
+      setTimeout(() => {
+        addressForm.remove();
+      }, 300);
+    }
+  });
+
+  // Handle residential as billing checkbox
+  document.getElementById('useResidentialAsBilling').addEventListener('change', function() {
+    const additionalAddresses = document.getElementById('billingAddressesContainer');
+    if (this.checked) {
+      additionalAddresses.style.opacity = '0.6';
+      additionalAddresses.style.pointerEvents = 'none';
+      additionalAddresses.querySelector('h4').textContent = 'Endereços de Cobrança Adicionais (Desabilitado - usando residencial)';
+    } else {
+      additionalAddresses.style.opacity = '1';
+      additionalAddresses.style.pointerEvents = 'auto';
+      additionalAddresses.querySelector('h4').textContent = 'Endereços de Cobrança Adicionais';
+    }
+  });
+
+  // Handle residential as delivery checkbox
+  document.getElementById('useResidentialAsDelivery').addEventListener('change', function() {
+    const additionalAddresses = document.getElementById('deliveryAddressesContainer');
+    if (this.checked) {
+      additionalAddresses.style.opacity = '0.6';
+      additionalAddresses.style.pointerEvents = 'none';
+      additionalAddresses.querySelector('h4').textContent = 'Endereços de Entrega Adicionais (Desabilitado - usando residencial)';
+    } else {
+      additionalAddresses.style.opacity = '1';
+      additionalAddresses.style.pointerEvents = 'auto';
+      additionalAddresses.querySelector('h4').textContent = 'Endereços de Entrega Adicionais';
+    }
+  });
+
+  // Form validation
+  document.getElementById('clientForm').addEventListener('submit', function(e) {
+    const billingChecked = document.getElementById('useResidentialAsBilling').checked;
+    const deliveryChecked = document.getElementById('useResidentialAsDelivery').checked;
+    const billingForms = document.querySelectorAll('#billingAddressesList .address-form');
+    const deliveryForms = document.querySelectorAll('#deliveryAddressesList .address-form');
+    
+    if (!billingChecked && billingForms.length === 0) {
+      e.preventDefault();
+      alert('Você deve definir pelo menos um endereço de cobrança ou usar o endereço residencial.');
+      return false;
+    }
+    
+    if (!deliveryChecked && deliveryForms.length === 0) {
+      e.preventDefault();
+      alert('Você deve definir pelo menos um endereço de entrega ou usar o endereço residencial.');
+      return false;
+    }
+  });
+});
+</script>

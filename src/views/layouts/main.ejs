@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Sistema de Gerenciamento de Clientes' %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Sistema de Gerenciamento de Clientes</h1>
+      <nav>
+        <ul>
+          <li><a href="/clients">Clientes</a></li>
+          <li><a href="/clients/new">Novo Cliente</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <%- body %>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 - Sistema de Gerenciamento de Clientes</p>
+    </div>
+  </footer>
+</body>
+</html>

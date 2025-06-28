@@ -1,0 +1,14 @@
+<div class="error-container">
+  <h2>Erro</h2>
+  
+  <div class="alert alert-danger">
+    <p><%= message %></p>
+    <% if (typeof error !== 'undefined') { %>
+      <p class="error-details"><%= error %></p>
+    <% } %>
+  </div>
+  
+  <div class="actions-container">
+    <a href="/clients" class="btn btn-primary">Voltar para Lista de Clientes</a>
+  </div>
+</div>

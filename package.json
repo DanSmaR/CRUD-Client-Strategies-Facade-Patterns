@@ -1,0 +1,44 @@
+{
+  "name": "client-crud-app",
+  "version": "1.0.0",
+  "description": "Aplicação CRUD de Cliente usando padrões Facade, Strategy e DAO Repository",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "crud",
+    "client",
+    "facade",
+    "strategy",
+    "dao",
+    "typescript",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/ejs": "^3.1.2",
+    "@types/express": "^4.17.17",
+    "@types/express-ejs-layouts": "^2.5.4",
+    "@types/node": "^20.3.1",
+    "@types/sqlite3": "^3.1.8",
+    "@types/uuid": "^9.0.2",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  }
+}

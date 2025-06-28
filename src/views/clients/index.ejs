@@ -1,0 +1,250 @@
+<h2>Lista de Clientes</h2>
+
+<!-- Advanced Search Form -->
+<div class="search-container">
+  <form action="/clients" method="GET" class="search-form">
+    <!-- Basic Identification Section -->
+    <div class="search-section">
+      <h3>Dados Pessoais</h3>
+      <div class="search-fields">
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" value="<%= filter.name || '' %>" placeholder="Buscar por nome">
+        </div>
+        
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" name="cpf" value="<%= filter.cpf || '' %>" placeholder="000.000.000-00">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" value="<%= filter.email || '' %>" placeholder="exemplo@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="gender">Gênero:</label>
+          <select id="gender" name="gender">
+            <option value="">Todos</option>
+            <% if (typeof genders !== 'undefined') { %>
+              <% genders.forEach(gender => { %>
+                <option value="<%= gender %>" <%= filter.gender === gender ? 'selected' : '' %>>
+                  <%= gender === 'M' ? 'Masculino' : gender === 'F' ? 'Feminino' : gender === 'O' ? 'Outro' : 'Não Informado' %>
+                </option>
+              <% }) %>
+            <% } %>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="isActive">Status:</label>
+          <select id="isActive" name="isActive">
+            <option value="">Todos</option>
+            <option value="true" <%= filter.isActive === 'true' ? 'selected' : '' %>>Ativo</option>
+            <option value="false" <%= filter.isActive === 'false' ? 'selected' : '' %>>Inativo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone Section -->
+    <div class="search-section">
+      <h3>Telefone</h3>
+      <div class="search-fields">
+        <div class="form-group">
+          <label for="phoneType">Tipo:</label>
+          <select id="phoneType" name="phoneType">
+            <option value="">Todos</option>
+            <% if (typeof phoneTypes !== 'undefined') { %>
+              <% phoneTypes.forEach(type => { %>
+                <option value="<%= type %>" <%= filter.phoneType === type ? 'selected' : '' %>><%= type %></option>
+              <% }) %>
+            <% } %>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="areaCode">DDD:</label>
+          <input type="text" id="areaCode" name="areaCode" maxlength="2" value="<%= filter.areaCode || '' %>" placeholder="11">
+        </div>
+        
+        <div class="form-group">
+          <label for="phoneNumber">Número:</label>
+          <input type="text" id="phoneNumber" name="phoneNumber" value="<%= filter.phoneNumber || '' %>" placeholder="99999-9999">
+        </div>
+      </div>
+    </div>
+
+    <!-- Date Filters Section -->
+    <div class="search-section">
+      <h3>Filtros por Data</h3>
+      <div class="search-fields">
+        <div class="form-group">
+          <label for="birthDateFrom">Nascimento de:</label>
+          <input type="date" id="birthDateFrom" name="birthDateFrom" value="<%= filter.birthDateFrom || '' %>">
+        </div>
+        
+        <div class="form-group">
+          <label for="birthDateTo">Nascimento até:</label>
+          <input type="date" id="birthDateTo" name="birthDateTo" value="<%= filter.birthDateTo || '' %>">
+        </div>
+        
+        <div class="form-group">
+          <label for="ageFrom">Idade mínima:</label>
+          <input type="number" id="ageFrom" name="ageFrom" min="0" max="120" value="<%= filter.ageFrom || '' %>" placeholder="18">
+        </div>
+        
+        <div class="form-group">
+          <label for="ageTo">Idade máxima:</label>
+          <input type="number" id="ageTo" name="ageTo" min="0" max="120" value="<%= filter.ageTo || '' %>" placeholder="65">
+        </div>
+        
+        <div class="form-group">
+          <label for="createdAtFrom">Cadastro de:</label>
+          <input type="date" id="createdAtFrom" name="createdAtFrom" value="<%= filter.createdAtFrom || '' %>">
+        </div>
+        
+        <div class="form-group">
+          <label for="createdAtTo">Cadastro até:</label>
+          <input type="date" id="createdAtTo" name="createdAtTo" value="<%= filter.createdAtTo || '' %>">
+        </div>
+      </div>
+    </div>
+
+    <!-- Address Section -->
+    <div class="search-section">
+      <h3>Endereço</h3>
+      <div class="search-fields">
+        <div class="form-group">
+          <label for="street">Logradouro:</label>
+          <input type="text" id="street" name="street" value="<%= filter.street || '' %>" placeholder="Nome da rua">
+        </div>
+        
+        <div class="form-group">
+          <label for="neighborhood">Bairro:</label>
+          <input type="text" id="neighborhood" name="neighborhood" value="<%= filter.neighborhood || '' %>" placeholder="Nome do bairro">
+        </div>
+        
+        <div class="form-group">
+          <label for="zipCode">CEP:</label>
+          <input type="text" id="zipCode" name="zipCode" value="<%= filter.zipCode || '' %>" placeholder="00000-000">
+        </div>
+        
+        <div class="form-group">
+          <label for="city">Cidade:</label>
+          <input type="text" id="city" name="city" value="<%= filter.city || '' %>" placeholder="Nome da cidade">
+        </div>
+        
+        <div class="form-group">
+          <label for="state">Estado:</label>
+          <input type="text" id="state" name="state" value="<%= filter.state || '' %>" placeholder="Nome do estado">
+        </div>
+        
+        <div class="form-group">
+          <label for="country">País:</label>
+          <input type="text" id="country" name="country" value="<%= filter.country || '' %>" placeholder="Nome do país">
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-actions">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+      <a href="/clients" class="btn btn-secondary">Limpar Filtros</a>
+      <button type="button" id="toggleAdvanced" class="btn btn-info">Mostrar/Ocultar Filtros Avançados</button>
+    </div>
+  </form>
+</div>
+
+<!-- Results -->
+<% if (clients && clients.length > 0) { %>
+  <div class="client-list">
+    <table class="clients-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th>Cidade/Estado</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% clients.forEach(client => { %>
+          <tr>
+            <td><%= client.name %></td>
+            <td><%= client.cpf %></td>
+            <td><%= client.email %></td>
+            <td><%= client.phone.getFullNumber() %></td>
+            <td><%= client.residentialAddress.city.name %>/<%= client.residentialAddress.city.state.name %></td>
+            <td>
+              <span class="status <%= client.isActive ? 'active' : 'inactive' %>">
+                <%= client.isActive ? 'Ativo' : 'Inativo' %>
+              </span>
+            </td>
+            <td class="actions">
+              <a href="/clients/<%= client.id %>" class="btn btn-view">Visualizar</a>
+              <a href="/clients/<%= client.id %>/edit" class="btn btn-edit">Editar</a>
+              <% if (client.isActive) { %>
+                <form action="/clients/<%= client.id %>/deactivate" method="POST" class="inline-form">
+                  <button type="submit" class="btn btn-secondary">Desativar</button>
+                </form>
+              <% } else { %>
+                <form action="/clients/<%= client.id %>/activate" method="POST" class="inline-form">
+                  <button type="submit" class="btn btn-secondary">Ativar</button>
+                </form>
+              <% } %>
+              <form action="/clients/<%= client.id %>/delete" method="POST" class="inline-form" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?')">
+                <button type="submit" class="btn btn-delete">Excluir</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    
+    <div class="results-info">
+      <p><strong><%= clients.length %></strong> cliente(s) encontrado(s)</p>
+      <% if (Object.keys(filter).length > 0) { %>
+        <p class="filter-summary">Filtros aplicados: 
+          <% Object.entries(filter).forEach(([key, value]) => { %>
+            <% if (value && value !== '') { %>
+              <span class="filter-tag"><%= key %>: <%= value %></span>
+            <% } %>
+          <% }) %>
+        </p>
+      <% } %>
+    </div>
+  </div>
+<% } else { %>
+  <p class="no-records">
+    <% if (Object.keys(filter).some(key => filter[key] && filter[key] !== '')) { %>
+      Nenhum cliente encontrado com os filtros aplicados.
+    <% } else { %>
+      Nenhum cliente cadastrado.
+    <% } %>
+  </p>
+<% } %>
+
+<div class="actions-container">
+  <a href="/clients/new" class="btn btn-primary">Novo Cliente</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtn = document.getElementById('toggleAdvanced');
+  const advancedSections = document.querySelectorAll('.search-section:nth-child(n+3)');
+  
+  // Initially hide advanced sections
+  advancedSections.forEach(section => {
+    section.style.display = 'none';
+  });
+  
+  toggleBtn.addEventListener('click', function() {
+    advancedSections.forEach(section => {
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+});
+</script>
