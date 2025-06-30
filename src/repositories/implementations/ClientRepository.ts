@@ -259,6 +259,7 @@ export class ClientRepository extends AbstractRepository implements IRepository<
     );
 
     client.id = row.id;
+    client.createdAt = row.created_at ? new Date(row.created_at) : undefined;
     client.isActive = Boolean(row.is_active);
 
     return client;

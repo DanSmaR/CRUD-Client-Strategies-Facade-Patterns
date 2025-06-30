@@ -219,6 +219,7 @@ export class AddressRepository extends AbstractRepository implements IRepository
         );
 
         address.id = row.id;
+        address.createdAt = row.created_at ? new Date(row.created_at) : undefined;
         return address;
     }
 
