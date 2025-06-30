@@ -1,8 +1,10 @@
-import { IDomainEntity } from '../../domain/interfaces/IDomainEntity';
+import {DomainEntity} from "../../domain/entities/DomainEntity";
 import { IStrategy } from '../interfaces/IStrategy';
 
-export class DateComplementStrategy implements IStrategy<IDomainEntity> {
-  async process(entity: IDomainEntity): Promise<string | null> {
+export class DateComplementStrategy implements IStrategy<DomainEntity
+> {
+  async process(entity: DomainEntity
+): Promise<string | null> {
     if (!entity.createdAt) {
       entity.createdAt = new Date();
     }

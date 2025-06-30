@@ -1,5 +1,5 @@
-import { IDomainEntity } from '../../domain/interfaces/IDomainEntity';
+import {DomainEntity} from "../../domain/entities/DomainEntity";
 
-export interface IStrategy<T extends IDomainEntity> {
+export interface IStrategy<T extends DomainEntity> {
   process(entity: T): Promise<string | null>;
 }

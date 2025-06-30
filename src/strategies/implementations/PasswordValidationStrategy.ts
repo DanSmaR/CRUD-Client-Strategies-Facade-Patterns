@@ -1,9 +1,11 @@
 import { IStrategy } from '../interfaces/IStrategy';
 import { Client } from '../../domain/entities/Client';
-import { IDomainEntity } from '../../domain/interfaces/IDomainEntity';
+import {DomainEntity} from "../../domain/entities/DomainEntity";
 
-export class PasswordValidationStrategy implements IStrategy<IDomainEntity> {
-  async process(entity: IDomainEntity): Promise<string | null> {
+export class PasswordValidationStrategy implements IStrategy<DomainEntity
+> {
+  async process(entity: DomainEntity
+): Promise<string | null> {
     if (!(entity instanceof Client)) {
       return null;
     }
