@@ -1,26 +1,18 @@
-import { IDomainEntity } from '../domain/interfaces/IDomainEntity';
 import { IFacade } from './interfaces/IFacade';
 import { IStrategy } from '../strategies/interfaces/IStrategy';
 import { IRepository } from '../repositories/interfaces/IRepository';
+import {DomainEntity} from "../domain/entities/DomainEntity";
 
 export class Facade implements IFacade {
-  private strategies: Map<string, IStrategy<IDomainEntity>[]>;
-  private repositories: Map<string, IRepository<IDomainEntity>>;
+  private strategies: Map<string, IStrategy<DomainEntity>[]>;
+  private repositories: Map<string, IRepository<DomainEntity>>;
   
-  constructor() {
-    this.strategies = new Map();
-    this.repositories = new Map();
+  constructor(strategies: Map<string, IStrategy<DomainEntity>[]> = new Map(), repositories: Map<string, IRepository<DomainEntity>> = new Map()) {
+    this.strategies = strategies;
+    this.repositories = repositories;
   }
   
-  registerStrategies(entityName: string, strategies: IStrategy<IDomainEntity>[]): void {
-    this.strategies.set(entityName, strategies);
-  }
-  
-  registerRepository(entityName: string, repository: IRepository<IDomainEntity>): void {
-    this.repositories.set(entityName, repository);
-  }
-  
-  async save(entity: IDomainEntity): Promise<string> {
+  async save(entity: DomainEntity): Promise<string> {
     try {
       const entityName = entity.constructor.name;
       const entityStrategies = this.strategies.get(entityName) || [];
@@ -45,7 +37,7 @@ export class Facade implements IFacade {
     }
   }
   
-  async update(entity: IDomainEntity): Promise<string> {
+  async update(entity: DomainEntity): Promise<string> {
     try {
       const entityName = entity.constructor.name;
       const entityStrategies = this.strategies.get(entityName) || [];
@@ -90,7 +82,7 @@ export class Facade implements IFacade {
     }
   }
   
-  async findById(id: string, entityType: string): Promise<IDomainEntity | null> {
+  async findById(id: string, entityType: string): Promise<DomainEntity | null> {
     try {
       const repository = this.repositories.get(entityType);
       if (!repository) {
@@ -105,7 +97,7 @@ export class Facade implements IFacade {
     }
   }
   
-  async findAll(entityType: string): Promise<IDomainEntity[]> {
+  async findAll(entityType: string): Promise<DomainEntity[]> {
     try {
       const repository = this.repositories.get(entityType);
       if (!repository) {
@@ -120,7 +112,7 @@ export class Facade implements IFacade {
     }
   }
 
-  async findByFilter(filter: any, entityType: string): Promise<IDomainEntity[]> {
+  async findByFilter(filter: any, entityType: string): Promise<DomainEntity[]> {
     try {
       const repository = this.repositories.get(entityType);
       if (!repository) {
