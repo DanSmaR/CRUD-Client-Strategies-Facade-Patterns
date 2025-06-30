@@ -1,6 +1,6 @@
-import { IDomainEntity } from '../../domain/interfaces/IDomainEntity';
+import {DomainEntity} from "../../domain/entities/DomainEntity";
 
-export interface IRepository<T extends IDomainEntity> {
+export interface IRepository<T extends DomainEntity> {
   save(entity: T): Promise<T>;
   update(entity: T): Promise<T>;
   delete(id: string): Promise<void>;
