@@ -1,10 +1,4 @@
-import { IDomainEntity } from '../interfaces/IDomainEntity';
-
-export abstract class DomainEntity implements IDomainEntity {
+export abstract class DomainEntity {
   id?: string;
   createdAt?: Date;
-  
-  constructor() {
-    this.createdAt = new Date();
-  }
 }
