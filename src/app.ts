@@ -14,9 +14,10 @@ import { AddressValidationStrategy } from './strategies/implementations/AddressV
 import { BirthDateValidationStrategy } from './strategies/implementations/BirthDateValidationStrategy';
 import { PasswordValidationStrategy } from './strategies/implementations/PasswordValidationStrategy';
 import { createClientRoutes } from './routes/clientRoutes';
+import {DatabaseSchema} from "./infrastructure/database/sqlite/DatabaseSchema";
 
 export class AppConfig {
-  private app: express.Application;
+  private readonly app: express.Application;
   private facade!: Facade;
   private clientController!: ClientController;
 
@@ -34,6 +35,15 @@ export class AppConfig {
     this.initializeControllers();
     this.configureRoutes();
     this.configureErrorHandling();
+    this.initializeDatabase();
+
+  }
+
+  private initializeDatabase(): void {
+    const dbSchema = new DatabaseSchema();
+    dbSchema.initializeSchema()
+      .then(() => console.log('Database schema initialized successfully'))
+      .catch(err => console.error('Error initializing database schema:', err));
   }
 
   private configureViewEngine(): void {
