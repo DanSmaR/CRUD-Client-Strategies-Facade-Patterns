@@ -1,11 +1,17 @@
 import sqlite3 from 'sqlite3';
+import path from "path";
+import * as fs from "node:fs";
 
 export class DatabaseConnection {
     private static instance: DatabaseConnection;
     private readonly db: sqlite3.Database;
 
     private constructor() {
-        this.db = new sqlite3.Database('./database.sqlite', (err) => {
+        const dbPath = path.resolve('./database.sqlite');
+        if (!fs.existsSync(dbPath)) {
+            fs.writeFileSync(dbPath, '');
+        }
+        this.db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
                 console.error('Erro ao conectar com o banco de dados:', err);
                 throw err;

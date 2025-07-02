@@ -22,10 +22,8 @@ export class DatabaseSchema {
                     await this.createClientBillingAddressesTable();
                     await this.createClientDeliveryAddressesTable();
 
-                    console.log('Database schema created successfully');
                     resolve();
                 } catch (error) {
-                    console.error('Erro ao criar schema do banco:', error);
                     reject(error);
                 }
             });
