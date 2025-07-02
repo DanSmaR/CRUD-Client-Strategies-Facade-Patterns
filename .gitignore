@@ -35,3 +35,5 @@ Thumbs.db
 # Relatórios
 coverage/
 .nyc_output/
+
+database.sqlite
