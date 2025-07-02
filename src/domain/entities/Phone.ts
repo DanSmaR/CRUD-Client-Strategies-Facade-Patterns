@@ -7,18 +7,44 @@ export enum PhoneType {
 }
 
 export class Phone extends DomainEntity {
-  type: PhoneType;
-  areaCode: string;
-  number: string;
+    private _type: PhoneType;
+    private _areaCode: string;
+    private _number: string;
 
-  constructor(type: PhoneType, areaCode: string, number: string) {
-    super();
-    this.type = type;
-    this.areaCode = areaCode;
-    this.number = number;
-  }
+    constructor(type: PhoneType, areaCode: string, number: string) {
+        super();
+        this._type = type;
+        this._areaCode = areaCode;
+        this._number = number;
+    }
+
+    // Getters
+    get type(): PhoneType {
+        return this._type;
+    }
+
+    get areaCode(): string {
+        return this._areaCode;
+    }
+
+    get number(): string {
+        return this._number;
+    }
+
+    // Setters
+    set type(type: PhoneType) {
+        this._type = type;
+    }
+
+    set areaCode(areaCode: string) {
+        this._areaCode = areaCode;
+    }
+
+    set number(number: string) {
+        this._number = number;
+    }
 
   getFullNumber(): string {
-    return `(${this.areaCode}) ${this.number}`;
+    return `(${this._areaCode}) ${this._number}`;
   }
 }

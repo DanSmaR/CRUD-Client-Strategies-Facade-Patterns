@@ -1,6 +1,5 @@
 import express from 'express';
 import { Client } from '../domain/entities/Client';
-import { Facade } from './Facade';
 import { Address } from '../domain/entities/Address';
 import { City } from '../domain/entities/City';
 import { State } from '../domain/entities/State';
@@ -9,12 +8,13 @@ import { Phone, PhoneType } from '../domain/entities/Phone';
 import { Gender } from '../domain/entities/Gender';
 import { ResidenceType, StreetType, AddressType } from '../domain/entities/AddressTypes';
 import { ClientFilter } from '../domain/interfaces/ClientFilter';
+import { IFacade } from './interfaces/IFacade';
 
 export class ClientController {
-  private facade: Facade;
+  private facade: IFacade;
   private readonly ENTITY_TYPE = 'Client';
   
-  constructor(facade: Facade) {
+  constructor(facade: IFacade) {
     this.facade = facade;
   }
 
@@ -307,8 +307,8 @@ export class ClientController {
     this.updateResidentialAddress(existingClient, data);
 
     // Clear existing addresses before repopulating
-    existingClient.billingAddresses = [];
-    existingClient.deliveryAddresses = [];
+    existingClient.billingAddresses.length = 0;
+    existingClient.deliveryAddresses.length = 0;
     
     // Process residential address as billing/delivery if needed
     this.processResidentialAsOtherAddresses(existingClient, data);
