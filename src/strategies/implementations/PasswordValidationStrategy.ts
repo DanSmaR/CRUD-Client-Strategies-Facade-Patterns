@@ -24,11 +24,6 @@ export class PasswordValidationStrategy implements IStrategy<DomainEntity
       return 'Senha não pode ter mais de 50 caracteres';
     }
 
-    // Verifica se tem pelo menos uma letra minúscula
-    if (!/[a-z]/.test(client.password)) {
-      return 'Senha deve conter pelo menos uma letra minúscula';
-    }
-
     // Verifica se tem pelo menos uma letra maiúscula
     if (!/[A-Z]/.test(client.password)) {
       return 'Senha deve conter pelo menos uma letra maiúscula';
